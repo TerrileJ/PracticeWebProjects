@@ -82,8 +82,42 @@ ul {
   margin-bottom: 10px;
 }
 
-.showcase btn {
+.showcase .btn {
   margin-top: 20px;
+}
+
+/* Home Cards */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.home-cards img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.card-section h2 {
+  font-size: 17px;
+}
+
+.card-section h2,
+.card-section p {
+  margin-bottom: 5px;
+}
+
+.card-section a {
+  color: #0067b8;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 5px;
+  padding-top: 10px;
+}
+
+.card-section a:hover {
+  border-bottom: #0067b8 2px solid;
+  margin-right: 8px;
 }
 
 /* Utility */
