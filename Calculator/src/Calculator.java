@@ -77,6 +77,38 @@ public class Calculator implements ActionListener {
             String displayText = reset ? "1" :display.getText() + "1";
             display.setText(displayText);
             reset = false;
+        } else if(e.getSource() == buttons[2]){
+            String displayText = reset ? "2" :display.getText() + "2";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[3]){
+            String displayText = reset ? "3" :display.getText() + "3";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[4]){
+            String displayText = reset ? "4" :display.getText() + "4";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[5]){
+            String displayText = reset ? "5" :display.getText() + "5";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[6]){
+            String displayText = reset ? "6" :display.getText() + "6";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[7]){
+            String displayText = reset ? "7" :display.getText() + "7";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[8]) {
+            String displayText = reset ? "8" : display.getText() + "8";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[9]){
+                String displayText = reset ? "9" :display.getText() + "9";
+                display.setText(displayText);
+                reset = false;
         } else if(e.getSource() == buttons[11]) {
             res += Integer.parseInt(display.getText());
             display.setText(Integer.toString(res));
