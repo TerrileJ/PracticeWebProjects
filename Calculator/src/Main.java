@@ -1,17 +1,48 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import javax.swing.*;
+import java.awt.*;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        JFrame frame = new JFrame();
+        frame.setLayout(new FlowLayout());
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(new Dimension(250,250));
 
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        // result label
+        JLabel display = new JLabel();
+        display.setPreferredSize(new Dimension(200, 30));
+        display.setText("0");
+        display.setOpaque(true);
+        display.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        display.setBackground(Color.lightGray);
+        display.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
-        }
+        // grid of buttons
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout(3,3));
+        JButton one = new JButton("1");
+        JButton two = new JButton("2");
+        JButton three = new JButton("3");
+        JButton four =  new JButton("4");
+        JButton five = new JButton("5");
+        JButton six = new JButton("6");
+        JButton seven = new JButton("7");
+        JButton eight = new JButton("8");
+        JButton nine = new JButton("9");
+
+        buttons.add(one);
+        buttons.add(two);
+        buttons.add(three);
+        buttons.add(four);
+        buttons.add(five);
+        buttons.add(six);
+        buttons.add(seven);
+        buttons.add(eight);
+        buttons.add(nine);
+
+        // add to frame
+        frame.add(display);
+        frame.add(buttons);
     }
 }
