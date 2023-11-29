@@ -147,6 +147,7 @@ public class Calculator implements ActionListener {
                     break;
             }
             display.setText(Integer.toString(res));
+            operation = "";
             reset = true;
         }
     }
