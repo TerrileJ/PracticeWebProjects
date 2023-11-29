@@ -114,21 +114,21 @@ public class Calculator implements ActionListener {
             reset = false;
         } else if(e.getSource() == buttons[11]) {
             // plus
-            res += Integer.parseInt(display.getText());
+            res += reset ? 0 : Integer.parseInt(display.getText());
             display.setText(Integer.toString(res));
             reset = true;
             operation = "plus";
         }
         else if(e.getSource() == buttons[12]) {
             // minus
-            res -= Integer.parseInt(display.getText());
+            res -= reset ? 0 : Integer.parseInt(display.getText());
             display.setText(Integer.toString(res));
             reset = true;
             operation = "minus";
         }
         else if(e.getSource() == buttons[13]) {
             // multiply
-            res *= Integer.parseInt(display.getText());
+            res *= reset ? 1 : Integer.parseInt(display.getText());
             display.setText(Integer.toString(res));
             reset = true;
             operation = "multiply";
