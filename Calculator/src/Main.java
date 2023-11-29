@@ -7,12 +7,11 @@ public class Main {
         frame.setLayout(new FlowLayout());
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(250,250));
+        frame.setSize(new Dimension(250,300));
 
         // result label
         JLabel display = new JLabel();
         display.setPreferredSize(new Dimension(200, 30));
-        display.setText("0");
         display.setOpaque(true);
         display.setBorder(BorderFactory.createLineBorder(Color.darkGray));
         display.setBackground(Color.lightGray);
@@ -20,7 +19,8 @@ public class Main {
 
         // grid of buttons
         JPanel buttons = new JPanel();
-        buttons.setLayout(new GridLayout(3,3));
+        buttons.setLayout(new GridLayout(4,4));
+        buttons.setPreferredSize(new Dimension(200,200));
         JButton one = new JButton("1");
         JButton two = new JButton("2");
         JButton three = new JButton("3");
@@ -31,15 +31,36 @@ public class Main {
         JButton eight = new JButton("8");
         JButton nine = new JButton("9");
 
+        one.addActionListener(e -> display.setText(display.getText() + "1"));
+        two.addActionListener(e -> display.setText(display.getText() + "2"));
+        three.addActionListener(e -> display.setText(display.getText() + "3"));
+        four.addActionListener(e -> display.setText(display.getText() + "4"));
+        five.addActionListener(e -> display.setText(display.getText() + "5"));
+        six.addActionListener(e -> display.setText(display.getText() + "6"));
+        seven.addActionListener(e -> display.setText(display.getText() + "7"));
+        eight.addActionListener(e -> display.setText(display.getText() + "8"));
+        nine.addActionListener(e -> display.setText(display.getText() + "9"));
+
+        JButton plus = new JButton("+");
+        JButton minus = new JButton("-");
+        JButton multiply = new JButton("*");
+        JButton divide = new JButton("/");
+        JButton delete = new JButton("Del");
+
         buttons.add(one);
         buttons.add(two);
         buttons.add(three);
+        buttons.add(plus);
         buttons.add(four);
         buttons.add(five);
         buttons.add(six);
+        buttons.add(minus);
         buttons.add(seven);
         buttons.add(eight);
         buttons.add(nine);
+        buttons.add(multiply);
+        buttons.add(delete);
+        buttons.add(divide);
 
         // add to frame
         frame.add(display);
