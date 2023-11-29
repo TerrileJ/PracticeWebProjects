@@ -9,9 +9,12 @@ public class Calculator implements ActionListener {
     JButton[] buttons;
     int res; // value stored in calculator
     boolean reset; // used to determine when number buttons should override current displayed text
+    String operation;
+
     Calculator() {
         res = 0;
         reset = false;
+        operation = "";
 
         frame = new JFrame();
         frame.setLayout(new FlowLayout());
@@ -106,11 +109,43 @@ public class Calculator implements ActionListener {
             display.setText(displayText);
             reset = false;
         } else if(e.getSource() == buttons[9]){
-                String displayText = reset ? "9" :display.getText() + "9";
-                display.setText(displayText);
-                reset = false;
+            String displayText = reset ? "9" :display.getText() + "9";
+            display.setText(displayText);
+            reset = false;
         } else if(e.getSource() == buttons[11]) {
+            // plus
             res += Integer.parseInt(display.getText());
+            display.setText(Integer.toString(res));
+            reset = true;
+            operation = "plus";
+        }
+        else if(e.getSource() == buttons[12]) {
+            // minus
+            res -= Integer.parseInt(display.getText());
+            display.setText(Integer.toString(res));
+            reset = true;
+            operation = "minus";
+        }
+        else if(e.getSource() == buttons[13]) {
+            // multiply
+            res *= Integer.parseInt(display.getText());
+            display.setText(Integer.toString(res));
+            reset = true;
+            operation = "multiply";
+        }
+        else if(e.getSource() == buttons[18]) {
+            // equal
+            switch (operation) {
+                case "plus":
+                    res += Integer.parseInt(display.getText());
+                    break;
+                case "minus":
+                    res -= Integer.parseInt(display.getText());
+                    break;
+                case "multiply":
+                    res *= Integer.parseInt(display.getText());
+                    break;
+            }
             display.setText(Integer.toString(res));
             reset = true;
         }
