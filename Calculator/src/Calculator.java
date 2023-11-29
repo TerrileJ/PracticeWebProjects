@@ -1,10 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Calculator {
+public class Calculator implements ActionListener {
     JFrame frame;
     JLabel display;
+    JButton[] buttons;
+    int res; // value stored in calculator
+    boolean reset; // used to determine when number buttons should override current displayed text
     Calculator() {
+        res = 0;
+        reset = false;
+
         frame = new JFrame();
         frame.setLayout(new FlowLayout());
         frame.setVisible(true);
@@ -26,7 +34,7 @@ public class Calculator {
         buttonContainer.setPreferredSize(new Dimension(200,200));
 
         // numbers
-        JButton[] buttons = new JButton[19];
+        buttons = new JButton[19];
         for(int i = 0; i < 10; i++) buttons[i] = new JButton("" + i); // set number buttons
 
         // operations
@@ -56,7 +64,23 @@ public class Calculator {
         buttonContainer.add(buttons[15]); // delete
         buttonContainer.add(buttons[16]); // clear
 
+        // add action listeners to all buttons
+        for(JButton button: buttons) button.addActionListener(this);
+
         frame.add(display);
         frame.add(buttonContainer);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == buttons[1]) {
+            String displayText = reset ? "1" :display.getText() + "1";
+            display.setText(displayText);
+            reset = false;
+        } else if(e.getSource() == buttons[11]) {
+            res += Integer.parseInt(display.getText());
+            display.setText(Integer.toString(res));
+            reset = true;
+        }
     }
 }
