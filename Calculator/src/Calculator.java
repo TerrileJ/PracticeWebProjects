@@ -77,25 +77,16 @@ public class Calculator implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == buttons[1]) {
-            setDisplay("1");
-        } else if(e.getSource() == buttons[2]){
-            setDisplay("2");
-        } else if(e.getSource() == buttons[3]){
-            setDisplay("3");
-        } else if(e.getSource() == buttons[4]){
-            setDisplay("4");
-        } else if(e.getSource() == buttons[5]){
-            setDisplay("5");
-        } else if(e.getSource() == buttons[6]){
-            setDisplay("6");
-        } else if(e.getSource() == buttons[7]){
-            setDisplay("7");
-        } else if(e.getSource() == buttons[8]) {
-            setDisplay("8");
-        } else if(e.getSource() == buttons[9]){
-            setDisplay("9");
-        } else if(e.getSource() == buttons[11]) {
+        if(e.getSource() == buttons[1]) setDisplay("1");
+        else if(e.getSource() == buttons[2]) setDisplay("2");
+        else if(e.getSource() == buttons[3]) setDisplay("3");
+        else if(e.getSource() == buttons[4]) setDisplay("4");
+        else if(e.getSource() == buttons[5]) setDisplay("5");
+        else if(e.getSource() == buttons[6]) setDisplay("6");
+        else if(e.getSource() == buttons[7]) setDisplay("7");
+        else if(e.getSource() == buttons[8]) setDisplay("8");
+        else if(e.getSource() == buttons[9]) setDisplay("9");
+        else if(e.getSource() == buttons[11]) {
             // plus
             calculateRes(Integer.parseInt(display.getText()));
             operation = "plus";
@@ -114,6 +105,18 @@ public class Calculator implements ActionListener {
             // equal
             calculateRes(Integer.parseInt(display.getText()));
             display.setText(Integer.toString(res));
+        }
+        else if(e.getSource() == buttons[15]) {
+            // delete - remove last inputted value, only when values are being inputted and NOT when results are being shown
+            if(!isFirstDigit) display.setText(display.getText().substring(0,Math.max(0,display.getText().length() - 1)));
+        }
+        else if(e.getSource() == buttons[16]) {
+            // clear - simply resets calculator to initial state
+            res = 0;
+            operation = "";
+            isStart = true;
+            isFirstDigit = true;
+            display.setText("");
         }
     }
 
