@@ -8,12 +8,14 @@ public class Calculator implements ActionListener {
     JLabel display;
     JButton[] buttons;
     int res; // value stored in calculator
-    boolean reset; // used to determine when number buttons should override current displayed text
+    boolean isFirstDigit; // used to determine when number buttons should override current displayed text
+    boolean isStart; // used to determine if calculator is at initial stage
     String operation;
 
     Calculator() {
         res = 0;
-        reset = false;
+        isStart = true;
+        isFirstDigit = true;
         operation = "";
 
         frame = new JFrame();
@@ -73,82 +75,94 @@ public class Calculator implements ActionListener {
         frame.add(display);
         frame.add(buttonContainer);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == buttons[1]) {
-            String displayText = reset ? "1" :display.getText() + "1";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("1");
         } else if(e.getSource() == buttons[2]){
-            String displayText = reset ? "2" :display.getText() + "2";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("2");
         } else if(e.getSource() == buttons[3]){
-            String displayText = reset ? "3" :display.getText() + "3";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("3");
         } else if(e.getSource() == buttons[4]){
-            String displayText = reset ? "4" :display.getText() + "4";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("4");
         } else if(e.getSource() == buttons[5]){
-            String displayText = reset ? "5" :display.getText() + "5";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("5");
         } else if(e.getSource() == buttons[6]){
-            String displayText = reset ? "6" :display.getText() + "6";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("6");
         } else if(e.getSource() == buttons[7]){
-            String displayText = reset ? "7" :display.getText() + "7";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("7");
         } else if(e.getSource() == buttons[8]) {
-            String displayText = reset ? "8" : display.getText() + "8";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("8");
         } else if(e.getSource() == buttons[9]){
-            String displayText = reset ? "9" :display.getText() + "9";
-            display.setText(displayText);
-            reset = false;
+            setDisplay("9");
         } else if(e.getSource() == buttons[11]) {
             // plus
-            res += reset ? 0 : Integer.parseInt(display.getText());
-            display.setText(Integer.toString(res));
-            reset = true;
+            calculateRes(Integer.parseInt(display.getText()));
             operation = "plus";
         }
         else if(e.getSource() == buttons[12]) {
             // minus
-            res -= reset ? 0 : Integer.parseInt(display.getText());
-            display.setText(Integer.toString(res));
-            reset = true;
+            calculateRes(Integer.parseInt(display.getText()));
             operation = "minus";
         }
         else if(e.getSource() == buttons[13]) {
             // multiply
-            res *= reset ? 1 : Integer.parseInt(display.getText());
-            display.setText(Integer.toString(res));
-            reset = true;
+            calculateRes(Integer.parseInt(display.getText()));
             operation = "multiply";
         }
         else if(e.getSource() == buttons[18]) {
             // equal
-            switch (operation) {
-                case "plus":
-                    res += Integer.parseInt(display.getText());
-                    break;
-                case "minus":
-                    res -= Integer.parseInt(display.getText());
-                    break;
-                case "multiply":
-                    res *= Integer.parseInt(display.getText());
-                    break;
-            }
+            calculateRes(Integer.parseInt(display.getText()));
             display.setText(Integer.toString(res));
-            operation = "";
-            reset = true;
         }
+    }
+
+    /**
+     * On pressing an operation btn, calculates updated result based on current operation and values
+     * @param number - value of number btn pressed before operation btn
+     */
+    public void calculateRes(int number) {
+        // base case 1 - this means we pressed an operation btn consecutively
+        if(isFirstDigit) return;
+
+        // update variables that have consistent behavior after all operations
+        isFirstDigit = true;
+
+        // base case 2- very first value inputted, only updates initial calculator result
+        if(isStart) {
+            res = number;
+            isStart = false;
+            return;
+        }
+
+        // calculate new result
+        switch (operation) {
+            case "plus":
+                res += number;
+                break;
+            case "minus":
+                res -= number;
+                break;
+            case "multiply":
+                res *= number;
+                break;
+        }
+        operation = "";
+
+        // show new result on display
+        display.setText(Integer.toString(res));
+    }
+
+    /**
+     * On pressing a number btn, updates display.
+     * If number is first digit of a new value, clears display and shows the number
+     * Otherwise, appends number to whatever is on display
+     *
+     * @param number - value of number btn pressed
+     */
+    public void setDisplay(String number) {
+        String displayText = isFirstDigit ? number : display.getText() + number;
+        display.setText(displayText);
+        isFirstDigit = false;
     }
 }
