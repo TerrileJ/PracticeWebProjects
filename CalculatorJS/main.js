@@ -28,7 +28,10 @@ for (let btn of numberBtns) {
 // operation button implementation
 for (let btn of operationBtns) {
   btn.addEventListener("click", (e) => {
-    if (isFirstDigit) return; // if first digit = true, then means we just pressed an operation. On two consecutive operations, just ignore.
+    if (isFirstDigit) {
+      operation = btn.id; // if first digit = true, then means we just pressed an operation. Simply switch the operation
+      return;
+    }
 
     isFirstDigit = true; // after an operation, always true that next number will be first digit of its value
     afterEquals = false;
