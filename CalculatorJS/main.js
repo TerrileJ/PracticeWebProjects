@@ -38,9 +38,15 @@ for (let btn of operationBtns) {
       case "plus":
         res += Number(display.innerHTML);
         break;
+      case "minus":
+        res -= Number(display.innerHTML);
+        break;
+      case "multiply":
+        res *= Number(display.innerHTML);
+        break;
     }
 
+    operation = btn.id;
     display.innerHTML = String(res); // update display
-    operation = btn.id; // update operation for next calculation
   });
 }
