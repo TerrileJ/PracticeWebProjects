@@ -1,16 +1,46 @@
 const display = document.querySelector(".calculator-display");
 const numberBtns = document.querySelectorAll(".numberBtn");
+const operationBtns = document.querySelectorAll(".operationBtn");
 
 // state variables
+let res = 0;
 let isFirstDigit = true;
+let isStart = true;
+let operation = "";
 
+// number button implementation
 for (let btn of numberBtns) {
-  console.log(btn.id);
   btn.addEventListener("click", (e) => {
     let displayText = isFirstDigit
       ? btn.innerHTML
       : display.innerHTML + btn.innerHTML;
     display.innerHTML = displayText;
     isFirstDigit = false;
+  });
+}
+
+// operation button implementation
+for (let btn of operationBtns) {
+  btn.addEventListener("click", (e) => {
+    if (isFirstDigit) return; // if first digit = true, then means we just pressed an operation. On two consecutive operations, just ignore.
+
+    isFirstDigit = true; // after an operation, always true that next number will be first digit of its value
+
+    // if just starting, update result accordingly
+    if (isStart) {
+      res = Number(display.innerHTML);
+      isStart = false;
+      operation = btn.id; // update operation for next calculation
+      return;
+    }
+
+    switch (operation) {
+      case "plus":
+        res += Number(display.innerHTML);
+        break;
+    }
+
+    display.innerHTML = String(res); // update display
+    operation = btn.id; // update operation for next calculation
   });
 }

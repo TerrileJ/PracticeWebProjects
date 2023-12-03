@@ -46,5 +46,13 @@
   font-size: 30px;
   margin: 5px 2px;
   border-radius: 10px;
-  border-style: none;
+  border: none;
+}
+
+.buttons:hover {
+  opacity: 0.75;
+}
+
+.operationBtn:focus {
+  border: solid;
 }
